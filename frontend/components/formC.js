@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 
 export default function TravelForm({ onSubmit }) {
   const locations = ["almora", "pithoragarh", "bhowali", "haldwani"];
+  const [name , setName] = useState("") ; 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
@@ -16,13 +17,18 @@ export default function TravelForm({ onSubmit }) {
   const [error, setError] = useState(null);
   const [ticket, setTicket] = useState(null);
   const router = useRouter();
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+  
+    // Wait for 5 seconds
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  
     router.push("/user/pass");
   };
+  
 
   return (
     <div className="min-h-screen bg-black flex justify-center items-center p-4">
@@ -89,6 +95,33 @@ export default function TravelForm({ onSubmit }) {
           {/* Form */}
           <form onSubmit={handleSubmit} className="p-6 space-y-6 bg-gray-900">
             {/* From field */}
+            {/* Name field */}
+<div className="space-y-2 group">
+  <label htmlFor="name" className="block text-sm font-medium text-gray-300 group-hover:text-blue-400 transition-colors duration-300">
+    Name
+  </label>
+  <div className="relative">
+    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors duration-300" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M10 2a4 4 0 00-4 4v1a4 4 0 108 0V6a4 4 0 00-4-4zM4 14a6 6 0 0112 0v1H4v-1z" />
+      </svg>
+    </div>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+      className="block w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 text-gray-200 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-blue-500 group-hover:shadow-md"
+      placeholder="Enter your name"
+      required
+    />
+    <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300" style={{ zIndex: -1, filter: "blur(4px)" }}></div>
+  </div>
+</div>
+
+
+
             <div className="space-y-2 group">
               <label htmlFor="from" className="block text-sm font-medium text-gray-300 group-hover:text-blue-400 transition-colors duration-300">
                 From
@@ -99,6 +132,7 @@ export default function TravelForm({ onSubmit }) {
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                   </svg>
                 </div>
+              
                 <select
                   id="from"
                   name="from"

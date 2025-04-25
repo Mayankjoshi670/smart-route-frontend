@@ -8,8 +8,8 @@ export default function Home() {
   const [currentDate, setCurrentDate] = useState(format(new Date(), 'dd MMM yyyy'));
   const [currentTime, setCurrentTime] = useState('');
   const [bookingData, setBookingData] = useState({
-    username: 'JOHN DOE',
-    vehicleNumber: 'UK04289734',
+    username: 'Mayank  Joshi',
+    vehicleNumber: 'UK05B0720',
     vehicleType: '4 wheeler',
     timeSlot: '9:00 AM - 10:00 AM',
     dateOfTravel: format(new Date(), 'dd MMM yyyy')
